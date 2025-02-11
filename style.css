@@ -1,16 +1,41 @@
 * {
     box-sizing: border-box;
-    font-family: sans-serif;
+    font-family:Verdana, Geneva, Tahoma, sans-serif;
     margin: 0;
+    filter: blur(0.003px);
     /* padding: 0; */
 }
+body {
+    background-color: hsl(60, 1%, 82%);
+}
 
+h3 {
+    font-size: 0.727rem;
+    text-align: right;
+    position: relative;
+    top: -46px;
+    left: -9px;
+    color:rgb(177, 173, 173);
+    font-weight: 400;
+}
+
+/* h2{
+    position: absolute;
+    font-size: 6em;
+    left: 90px;
+    top: 36px;
+    color: rgba(22, 22, 22, 0.829);
+}
+ */
 #container {
-    background-color: rgb(128, 128, 131);
+    background-color: rgb(233, 233, 233);
     margin: 10rem auto;
     width:  460px;
     aspect-ratio: 1 / 1.376;
     padding: 1.376rem;
+    border-radius: 0.384rem;
+    border: 3px solid rgba(212, 212, 212, 0.315);
+    box-shadow: 1.736rem 0.8rem 120px  rgba(99, 93, 93, 0.123);
 }
 
 .top {
@@ -36,7 +61,11 @@ h1 {
 .display {
     flex-grow: 1;
     border: 1px solid black;
-    background-color: rgb(172, 194, 186);
+    background-color: rgb(185, 199, 194);
+    padding: 1.376rem ;
+    font-size: 1.376rem;
+    font-family: monospace;
+    filter: blur(0.22px);
 }
 
 
@@ -54,18 +83,29 @@ h1 {
     gap: 0.384rem;
     width: 100%;
     
+    
+}
+
+.pad{
+border-radius: 0.384rem;
+border: 2px solid rgba(27, 27, 26, 0.459);
+font-size:3.585rem;
+background-color: rgba(236, 236, 235, 0.288);
+color: rgba(54, 54, 53, 0.938);
+font-weight: 900;
 }
 
 .keypad .pad {
     width: 100%;
     aspect-ratio: 1 / 1;
+    border-radius: 0.384rem;
 }
 
 .operators {
     display: flex;
     flex-flow: column;
     justify-content: space-between;
-    gap: 0.384rem;
+    gap: 0.584rem;
     
 }
 
@@ -87,4 +127,14 @@ aspect-ratio: 1 / 1;
 
 #equalsButton {
     flex-basis: calc(100% / 0.727);
+    font-size:4.993rem;
+}
+
+.op {
+    background-color:rgba(228, 129, 72, 0.945);
+    color: rgba(54, 54, 53, 0.938);
+    border-radius:0.384rem;
+    font-size: 2.605rem;
+    font-weight: bold;
+    border: 2px solid rgb(230, 152, 107)
 }
