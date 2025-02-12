@@ -7,49 +7,51 @@
     <title>Document</title>
 </head>
 <body>
-    <div id="container">
-        <div class="top">
-            <div class="logo-clear">
-                <h1 id="logo">BCAUSY</h1>
-                <h3>digital calculator</h3>
-                <button type="button" id="clearButton" class="sPad">clear</button>
+    <div class="axisZ">
+        <div id="container">
+            <div class="top">
+                <div class="logo-clear">
+                    <h1 id="logo">BCAUSY</h1>
+                    <h3>digital <span>calculator</span></h3>
+                    <button type="button" id="clearButton" class="sPad">clear</button>
+                </div>
+                <div class="display">
+                    <span class="digit" id="num1">85</span>
+                    <span class=="digit" id="operator">x</span>
+                    <span class="digit" id="num2">941</span>
+                    <span class="digit">=</span>
+                    <span class="digit" id="result">80085</span>
+                </div>
             </div>
-            <div class="display">
-                <span class="digit" id="num1">85</span>
-                <span class=="digit" id="operator">x</span>
-                <span class="digit" id="num2">941</span>
-                <span class="digit">=</span>
-                <span class="digit" id="result">80085</span>
-            </div>
-        </div>
-        <div class="middle">
-            <div class="keypad">
-                <button class="pad"  type="button" value="1">1</button>
-                <button class="pad"  type="button" value="2">2</button>
-                <button class="pad"  type="button" value="3">3</button>
-                <button class="pad"  type="button" value="4">4</button>
-                <button class="pad"  type="button" value="5">5</button>
-                <button class="pad"  type="button" value="6">6</button>
-                <button class="pad"  type="button" value="7">7</button>
-                <button class="pad"  type="button" value="8">8</button>
-                <button class="pad"  type="button" value="9">9</button>
-            </div>
-            <div class="operators">
-                <div class="delete">
-                    <button class="sPad"value="delete">delete</button>
+            <div class="middle">
+                <div class="keypad">
+                    <button class="pad"  type="button" value="1">1</button>
+                    <button class="pad"  type="button" value="2">2</button>
+                    <button class="pad"  type="button" value="3">3</button>
+                    <button class="pad"  type="button" value="4">4</button>
+                    <button class="pad"  type="button" value="5">5</button>
+                    <button class="pad"  type="button" value="6">6</button>
+                    <button class="pad"  type="button" value="7">7</button>
+                    <button class="pad"  type="button" value="8">8</button>
+                    <button class="pad"  type="button" value="9">9</button>
                 </div>
                 <div class="operators">
-                    <button class="op" type="button" value="+">+</button>
-                    <button class="op" type="button" value="-">-</button>
-                    <button class="op" type="button" value="/">/</button>
-                    <button class="op" type="button" value="x">x</button>
+                    <div class="delete">
+                        <button class="sPad"value="delete">delete</button>
+                    </div>
+                    <div class="operators">
+                        <button class="op" type="button" value="+">+</button>
+                        <button class="op" type="button" value="-">-</button>
+                        <button class="op" type="button" value="/">/</button>
+                        <button class="op" type="button" value="x">x</button>
+                    </div>
                 </div>
             </div>
-        </div>
-        <div id="bottom">
-            <button class="pad" type="button" value="0">0</button>
-            <button class="pad" type="button" value=".">.</button>
-            <button class="pad" id="equalsButton" value="=">=</button>
+            <div id="bottom">
+                <button class="pad" type="button" value="0">0</button>
+                <button class="pad" type="button" value=".">.</button>
+                <button class="pad" id="equalsButton" value="=">=</button>
+            </div>
         </div>
     </div>
     <script src="script.js"></script>
