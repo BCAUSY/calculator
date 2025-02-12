@@ -46,7 +46,7 @@ h3 {
  */
 
  .axisZ {
-    box-shadow: 1rem var(--uuRem) 1.45px rgba(25, 27, 43, 0.842);
+    box-shadow: var(--dddRem) var(--ddddRem) 1.45px rgba(121, 123, 134, 0.288);
     width: 460px;
     margin: auto;
     border-radius: var(--ddddRem);
@@ -95,12 +95,14 @@ h1 {
 
 
 .display {
+    overflow-y: hidden;
     flex-grow: 1;
     border: 1px solid black;
     background-color: rgb(185, 199, 194);
     padding: 1.376rem ;
-    font-size: 1.376rem;
+    font-size: var(--uRem);
     font-family: monospace;
+    font-weight: 500;
     filter: blur(0.22px);
 }
 
@@ -140,7 +142,8 @@ border: 2px solid rgba(27, 27, 26, 0.459);
 font-size:3.585rem;
 background-color: rgba(236, 236, 235, 0.959);
 color: rgba(54, 54, 53, 0.938);
-font-weight: 900;
+font-weight: 700;
+font-family: Roboto;
 }
 
 .keypad .pad {
@@ -149,14 +152,14 @@ font-weight: 900;
     border-radius: 0.384rem;
 }
 
-.keypad::after {
+/* .keypad::after {
     content: "";
     position: absolute;
     width: 2px;
     height: 100%;
     background-color: rgba(49, 40, 40, 0.185);
-    left: 343px;
-}
+    left: 349px;
+} */
 
 .keypad::before {
     content: "";
@@ -172,7 +175,7 @@ font-weight: 900;
     flex-flow: column;
     justify-content: space-between;
     gap: 0.584rem;
-    margin-left: var(--ddddRem);
+    /* margin-left: var(--ddddRem); */
     padding-bottom: var(--ddddRem);
     
 }
