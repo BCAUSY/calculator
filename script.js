@@ -31,16 +31,19 @@ const operator = document.querySelectorAll(".op");
 const sum = document.getElementById("equalsButton");
 let result = [];
 
+sum.addEventListener("click", getFinSum);
 clearButton.addEventListener("click", clear);
-let clearTrigger = false;
 
+let clearTrigger = false;
 let numOneTrigger = false;
 let numTwoTrigger = false;
-
+let sumTrigger = false;
 let finNumOne = 0;
 let finNumTwo = 0;
 let finOperator = 0;
 let finSum = 0;
+let history = [];
+
 function backspace() {
   if (numTwoTrigger) numOneTrigger = false;
   if (numOneTrigger) {
@@ -67,6 +70,7 @@ function clear() {
   finSum = 0;
   numOneTrigger = false;
   numTwoTrigger = false;
+  sumTrigger = false;
 
   keyPad.forEach((button) => {
     button.removeEventListener("click", numTwoIn);
@@ -78,6 +82,10 @@ function clear() {
   keyPad.forEach((button) => {
     button.addEventListener("click", numIn);
   });
+
+  if (history.length > 5){
+    history = [];
+  }
 }
 
 keyPad.forEach((button) => {
@@ -94,6 +102,9 @@ function numIn() {
   digitOne.innerText += buttonValue;
   numOneTrigger = true;
   finNumOne = Number(digitOne.innerText);
+  if (sumTrigger){
+   clear()
+  }
 }
 
 function numTwoIn() {
@@ -114,6 +125,15 @@ function operIn() {
       button.addEventListener("click", numTwoIn);
     });
   }
+  if (sumTrigger){
+    finNumOne = finSum;
+    digitOne.innerText = finSum;
+    finNumTwo = 0;
+    digitTwo.innerText = "";
+    finSum = 0;
+    digitSum.innerText = "";
+    sumTrigger = false;
+    }
 }
 function operateMore(num1, operator, num2) {
     
@@ -136,13 +156,24 @@ function operate(num1, operator, num2) {
   } 
 }
 
-let history = [];
+
 
 function getFinSum() {
   deleteButton.removeEventListener("click", backspace);
-  operate(finNumOne, finOperator, finNumTwo);
+  if (!sumTrigger){ operate(finNumOne, finOperator, finNumTwo);
   digitSum.innerText = finSum;
-  result = [finNumOne + finOperator + finNumTwo + "=" + finSum];
-  history.push(result);
+  result = finNumOne + finOperator + finNumTwo + "=" + finSum;
+  history.unshift(result);
+  sumTrigger = true;
+  if (numOneTrigger) {
+    keyPad.forEach((button) => {
+      button.removeEventListener("click", numTwoIn);
+    });
+    keyPad.forEach((button) => {
+      button.addEventListener("click", numIn);
+    });
+  }
 }
-sum.addEventListener("click", getFinSum);
+}
+
+/* sum.removeEventListener("click", getFinSum); */
