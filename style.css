@@ -53,6 +53,7 @@ h3 {
  }
 
 #container {
+    max-width: 100%;
     background-color: rgb(233, 233, 233);
     margin: 6.788rem auto;
     width:  460px;
@@ -222,3 +223,9 @@ font-family: Roboto;
     border: 2px solid rgb(230, 152, 107);
 }
  
+.pad, #equalsButton, .op {
+    user-select: none; /* Disable text selection */
+    -webkit-user-select: none; /* For Safari */
+    -moz-user-select: none; /* For Firefox */
+    -ms-user-select: none; /* For Internet Explorer/Edge */
+}

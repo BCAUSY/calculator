@@ -1,4 +1,7 @@
 // --- Math Operations ---
+if (window.devicePixelRatio > 2) {
+  document.body.style.filter = "blur(0.001px)";
+}
 function add(num1, num2) {
   return roundToTwo(num1 + num2);
 }
