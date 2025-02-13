@@ -31,6 +31,18 @@ const operator = document.querySelectorAll(".op");
 const sum = document.getElementById("equalsButton");
 let result = [];
 
+const display = document.querySelector(".display");
+const displaySums = document.createElement("div")
+displaySums.style.height = "88%";
+displaySums.style.display = "flex";
+displaySums.style.flexFlow = "column";
+displaySums.classList.add("dup");
+displaySums.style.fontSize = "1rem";
+
+/* displaySums.style.backgroundColor = "red" */
+display.appendChild(displaySums);
+
+
 sum.addEventListener("click", getFinSum);
 clearButton.addEventListener("click", clear);
 
@@ -45,7 +57,6 @@ let finSum = 0;
 let history = [];
 
 function backspace() {
-
   if (numTwoTrigger) numOneTrigger = false;
   if (numOneTrigger) {
     digitOne.innerText = digitOne.innerText.slice(
@@ -54,7 +65,7 @@ function backspace() {
     );
     finNumOne = Number(digitOne.innerText);
   }
-  if (numTwoTrigger || numTwoTrigger && sumTrigger) {
+  if (numTwoTrigger || (numTwoTrigger && sumTrigger)) {
     digitTwo.innerText = digitTwo.innerText.slice(
       0,
       digitTwo.innerText.length - 1
@@ -64,6 +75,8 @@ function backspace() {
 }
 
 function clear() {
+  displaySums.innerText = "";
+  history = [];
   console.log("CLEAR");
   finNumOne = 0;
   finNumTwo = 0;
@@ -71,6 +84,7 @@ function clear() {
   finSum = 0;
   sumTrigger = false;
   numTwoTrigger = false;
+  /* isToLong(); */
   keyPad.forEach((button) => {
     button.removeEventListener("click", numTwoIn);
   });
@@ -82,9 +96,11 @@ function clear() {
     button.addEventListener("click", numIn);
   });
 
-  if (history.length > 5){
-    history = [];
+  if (history.length > 5) {
+    result.innerText = "";
+     history = history.slice(-5);
   }
+  
 }
 
 keyPad.forEach((button) => {
@@ -92,7 +108,6 @@ keyPad.forEach((button) => {
 });
 
 function numIn() {
-  console.log("numtwo", numTwoTrigger);
   console.log(this.value);
   deleteButton.addEventListener("click", backspace);
   if (!clearTrigger) {
@@ -102,26 +117,24 @@ function numIn() {
   const buttonValue = this.value;
   digitOne.innerText += buttonValue;
   finNumOne = Number(digitOne.innerText);
-  
-  if (sumTrigger){
-    clear()
+
+  if (sumTrigger) {
+    clear();
     clearTrigger = false;
   }
   numOneTrigger = true;
 }
 
 function numTwoIn() {
-  console.log("before", numTwoTrigger)
+    console.log(this.value);
   numTwoTrigger = true;
-  console.log("before", numTwoTrigger);
   const buttonValue = this.value;
   digitTwo.innerText += buttonValue;
-  console.log(digitTwo.innerText);
   finNumTwo = Number(digitTwo.innerText);
 }
 
 function operIn() {
-
+    console.log(this.value);
   finOperator = digitOperator.innerText = this.value;
 
   if (numOneTrigger) {
@@ -131,9 +144,9 @@ function operIn() {
     keyPad.forEach((button) => {
       button.addEventListener("click", numTwoIn);
     });
-  } 
-  if (sumTrigger){
-      console.log("SUMTRIGGER");
+  }
+  if (sumTrigger) {
+    console.log("SUMTRIGGER");
 
     finNumOne = finSum;
     digitOne.innerText = finSum;
@@ -142,10 +155,8 @@ function operIn() {
     finSum = 0;
     digitSum.innerText = "";
     sumTrigger = false;
-    }
-
+  }
 }
-
 
 operator.forEach((button) => {
   button.addEventListener("click", operIn);
@@ -160,27 +171,66 @@ function operate(num1, operator, num2) {
     finSum = divide(num1, num2);
   } else if (operator === "×") {
     finSum = multiply(num1, num2);
-  } 
+  }
 }
-
-
 
 function getFinSum() {
-/*   deleteButton.removeEventListener("click", backspace);
- */  if (!sumTrigger){ operate(finNumOne, finOperator, finNumTwo);
-  digitSum.innerText = finSum;
-  result = [finNumOne + finOperator + finNumTwo + "=" + finSum];
-  history.unshift(result);
-  sumTrigger = true;
-  if (numOneTrigger) {
-    keyPad.forEach((button) => {
-      button.removeEventListener("click", numTwoIn);
-    });
-    keyPad.forEach((button) => {
-      button.addEventListener("click", numIn);
-    });
+    console.log(this.value);
+  if (!sumTrigger) {
+    operate(finNumOne, finOperator, finNumTwo);
+    digitSum.innerText = finSum;
+    result = [finNumOne + finOperator + finNumTwo + "=" + finSum];
+    history.unshift(result);
+    sumTrigger = true;
+    if (numOneTrigger) {
+      keyPad.forEach((button) => {
+        button.removeEventListener("click", numTwoIn);
+      });
+      keyPad.forEach((button) => {
+        button.addEventListener("click", numIn);
+      });
+    }
+    console.log(history);
+     addSpan();
   }
-  console.log(history);
+  if (history.length > 5) {
+    isToLong();
+  }
+ 
 }
+function addSpan(){
+  const result = document.createElement("span");
+  result.innerText = history[0]
+  result.style.display = "block"
+  result.style.textAlign = "right";
+  result.style.paddingLeft = "90px";
+  displaySums.prepend(result);
+
 }
 
+function isToLong(){
+  // Remove the last history item and corresponding span
+  history.pop();
+  const lastSpan = displaySums.querySelector("span:last-child");
+  if (lastSpan) {
+    lastSpan.remove();
+  }
+  /*  displaySums.innerText = "";
+     history = []; */
+}
+
+
+
+function hover() {
+  this.style.filter = "invert(.2)";
+
+}
+
+function resetHover() {
+  this.style.filter = "invert(0)";
+}
+
+keyPad.forEach((button) => {
+  button.addEventListener("pointerdown", hover);
+  button.addEventListener("pointerup", resetHover);
+});
