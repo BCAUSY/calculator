@@ -35,7 +35,7 @@ sum.addEventListener("click", getFinSum);
 clearButton.addEventListener("click", clear);
 
 let clearTrigger = false;
-let numOneTrigger = false;
+let numOneTrigger = true;
 let numTwoTrigger = false;
 let sumTrigger = false;
 let finNumOne = 0;
@@ -61,15 +61,13 @@ function backspace() {
     finNumTwo = Number(digitTwo.innerText);
   }
 }
-console.log(numOneTrigger);
 
 function clear() {
+  console.log("CLEAR");
   finNumOne = 0;
   finNumTwo = 0;
   finOperator = 0;
   finSum = 0;
-  numOneTrigger = false;
-  numTwoTrigger = false;
   sumTrigger = false;
 
   keyPad.forEach((button) => {
@@ -93,6 +91,8 @@ keyPad.forEach((button) => {
 });
 
 function numIn() {
+  console.log("numtwo", numTwoTrigger);
+  console.log(this.value);
   deleteButton.addEventListener("click", backspace);
   if (!clearTrigger) {
     clear();
@@ -100,23 +100,29 @@ function numIn() {
   }
   const buttonValue = this.value;
   digitOne.innerText += buttonValue;
-  numOneTrigger = true;
   finNumOne = Number(digitOne.innerText);
+  
   if (sumTrigger){
-   clear()
+    clear()
+    clearTrigger = false;
   }
+  numOneTrigger = true;
 }
 
 function numTwoIn() {
+  console.log("before", numTwoTrigger)
   numTwoTrigger = true;
+  console.log("before", numTwoTrigger);
   const buttonValue = this.value;
   digitTwo.innerText += buttonValue;
+  console.log(digitTwo.innerText);
   finNumTwo = Number(digitTwo.innerText);
 }
 
 function operIn() {
-  digitOperator.innerText = this.value;
+
   finOperator = digitOperator.innerText = this.value;
+
   if (numOneTrigger) {
     keyPad.forEach((button) => {
       button.removeEventListener("click", numIn);
@@ -124,8 +130,10 @@ function operIn() {
     keyPad.forEach((button) => {
       button.addEventListener("click", numTwoIn);
     });
-  }
+  } 
   if (sumTrigger){
+      console.log("SUMTRIGGER");
+
     finNumOne = finSum;
     digitOne.innerText = finSum;
     finNumTwo = 0;
@@ -134,11 +142,9 @@ function operIn() {
     digitSum.innerText = "";
     sumTrigger = false;
     }
-}
-function operateMore(num1, operator, num2) {
-    
 
 }
+
 
 operator.forEach((button) => {
   button.addEventListener("click", operIn);
@@ -151,7 +157,7 @@ function operate(num1, operator, num2) {
     finSum = subtract(num1, num2);
   } else if (operator === "÷") {
     finSum = divide(num1, num2);
-  } else if (digitOperator.innerText === "×") {
+  } else if (operator === "×") {
     finSum = multiply(num1, num2);
   } 
 }
@@ -162,7 +168,7 @@ function getFinSum() {
   deleteButton.removeEventListener("click", backspace);
   if (!sumTrigger){ operate(finNumOne, finOperator, finNumTwo);
   digitSum.innerText = finSum;
-  result = finNumOne + finOperator + finNumTwo + "=" + finSum;
+  result = [finNumOne + finOperator + finNumTwo + "=" + finSum];
   history.unshift(result);
   sumTrigger = true;
   if (numOneTrigger) {
@@ -173,7 +179,7 @@ function getFinSum() {
       button.addEventListener("click", numIn);
     });
   }
+  console.log(history);
 }
 }
 
-/* sum.removeEventListener("click", getFinSum); */

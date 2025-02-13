@@ -21,7 +21,7 @@ body {
 }
 
 h3 {
-    font-size: var(--dRe);
+    font-size: var(--dRem);
     text-align: left;
    /*  position: relative; */
     top: -43px;
