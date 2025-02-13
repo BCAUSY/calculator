@@ -45,6 +45,7 @@ let finSum = 0;
 let history = [];
 
 function backspace() {
+
   if (numTwoTrigger) numOneTrigger = false;
   if (numOneTrigger) {
     digitOne.innerText = digitOne.innerText.slice(
@@ -53,7 +54,7 @@ function backspace() {
     );
     finNumOne = Number(digitOne.innerText);
   }
-  if (numTwoTrigger) {
+  if (numTwoTrigger || numTwoTrigger && sumTrigger) {
     digitTwo.innerText = digitTwo.innerText.slice(
       0,
       digitTwo.innerText.length - 1
@@ -69,7 +70,7 @@ function clear() {
   finOperator = 0;
   finSum = 0;
   sumTrigger = false;
-
+  numTwoTrigger = false;
   keyPad.forEach((button) => {
     button.removeEventListener("click", numTwoIn);
   });
@@ -165,8 +166,8 @@ function operate(num1, operator, num2) {
 
 
 function getFinSum() {
-  deleteButton.removeEventListener("click", backspace);
-  if (!sumTrigger){ operate(finNumOne, finOperator, finNumTwo);
+/*   deleteButton.removeEventListener("click", backspace);
+ */  if (!sumTrigger){ operate(finNumOne, finOperator, finNumTwo);
   digitSum.innerText = finSum;
   result = [finNumOne + finOperator + finNumTwo + "=" + finSum];
   history.unshift(result);
