@@ -1,7 +1,4 @@
-// --- Math Operations ---
-if (window.devicePixelRatio > 2) {
-  document.body.style.filter = "blur(0.001px)";
-}
+
 function add(num1, num2) {
   return roundToTwo(num1 + num2);
 }
@@ -240,7 +237,6 @@ function addSpan() {
 }
 
 function isToLong() {
-  // Remove the last history item and corresponding span
   history.pop();
   const lastSpan = displaySums.querySelector("span:last-child");
   if (lastSpan) {
@@ -264,6 +260,6 @@ function clicked() {
 }
 
 function clickedReset() {
-  this.style.transform = "translate3d(0px, 0px, 0px)";
+  this.style.transform = "translate3d(0px, 3px, 0px)";
   this.style.backgroundColor = "#EBEBEA";
 }

@@ -104,7 +104,7 @@ h1 {
     font-size: var(--uRem);
     font-family: monospace;
     font-weight: 500;
-    filter: blur(1px);
+    filter: blur(0.01rem);
 }
 
 
